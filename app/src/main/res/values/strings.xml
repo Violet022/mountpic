@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MainPage</string>
+    <string name="Gallery">Галерея</string>
+    <string name="Camera">Камера</string>
+    <string name="cube">3D - кубик</string>
+</resources>
