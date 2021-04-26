@@ -9,6 +9,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
-//help
-//me too
-//дфдфд
+//моя ветка
