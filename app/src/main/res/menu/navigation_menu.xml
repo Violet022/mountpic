@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Rotation"
+        android:id="@+id/actionRotation"/>
+
+    <item
+        android:title="Color Correction"
+        android:id="@+id/actionColorCorrection"/>
+
+    <item
+        android:title="Face Recognition"
+        android:id="@+id/actionFaceRecognition"/>
+
+    <item
+        android:title="Filtration"
+        android:id="@+id/actionFiltration"/>
+
+    <item
+        android:title="Masking"
+        android:id="@+id/actionMasking"/>
+
+    <item
+        android:title="Retouch"
+        android:id="@+id/actionRetouch"/>
+
+    <item
+        android:title="Scaling"
+        android:id="@+id/actionScaling"/>
+
+    <item
+        android:title="Splines"
+        android:id="@+id/actionSplines"/>
+</menu>
