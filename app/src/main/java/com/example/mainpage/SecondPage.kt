@@ -1,6 +1,9 @@
 package com.example.mainpage
 
+import android.app.Activity
 import android.app.ProgressDialog.show
+import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,18 +17,19 @@ import com.example.mainpage.databinding.ActivitySecondBinding
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
 
-class SecondPage : AppCompatActivity(R.layout.activity_second){
+class SecondPage : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivitySecondBinding::bind, R.id.drawerLayout)
-
-    companion object {
-        const val KE_Y = "ke_y"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
+
+        //получение изображения из галереи по Uri
+        val image: ImageView = findViewById(R.id.image_view)
+        val picture = intent?.extras?.get("UriImage") as Uri
+        image.setImageURI(picture)
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
@@ -77,9 +81,6 @@ class SecondPage : AppCompatActivity(R.layout.activity_second){
                 else -> false
             }
         }
-
-        val image: ImageView = findViewById(R.id.image_view)
-        //тут доделать
     }
 
     private fun selectScreen(tag: String, fragment: Fragment) {
@@ -103,8 +104,5 @@ class SecondPage : AppCompatActivity(R.layout.activity_second){
         }
     }
 
-
-
     private fun findActiveFragment() = supportFragmentManager.fragments.find { it.isVisible }
-
 }
