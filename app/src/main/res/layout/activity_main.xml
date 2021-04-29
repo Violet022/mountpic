@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/camera"
+        android:id="@+id/camera_btn"
         android:layout_width="242dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
@@ -55,5 +55,6 @@
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_btn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
