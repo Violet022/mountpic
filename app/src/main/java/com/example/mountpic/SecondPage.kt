@@ -8,8 +8,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.system.Os.close
+import android.view.Gravity
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -37,10 +39,6 @@ class SecondPage : AppCompatActivity() {
             val picture = intent?.extras?.get("ImageCamera") as Uri
             image.setImageURI(picture)
         }
-        /*if(intent?.extras?.get("BitmapImage") != null){
-            val picture = intent?.extras?.get("BitmapImage") as Bitmap
-            image.setImageBitmap(picture)
-        }*/
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
@@ -48,6 +46,7 @@ class SecondPage : AppCompatActivity() {
         toggle.syncState()
 
         viewBinding.navMenu.setNavigationItemSelectedListener { item ->
+            viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
             when(item.itemId){
                 R.id.actionRotation -> {
                     selectScreen(RotationFragment.TAG, RotationFragment.newInstance())

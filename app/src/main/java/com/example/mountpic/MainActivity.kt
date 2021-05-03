@@ -27,7 +27,6 @@ private const val IMAGE_CAMERA_CODE = 3
 private const val IMAGE_STORAGE_CODE = 4
 private const val FILE_NAME = "photo.jpg"
 private lateinit var photoFile: File
-private lateinit var mImage: Uri
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnCamera: Button
