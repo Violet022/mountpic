@@ -3,7 +3,9 @@ package com.example.mainpage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.system.Os.close
+import android.view.Gravity
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -26,6 +28,7 @@ class SecondPage : AppCompatActivity(R.layout.activity_second){
         toggle.syncState()
 
         viewBinding.navMenu.setNavigationItemSelectedListener { item ->
+            viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
             when(item.itemId){
                 R.id.actionRotation -> {
                     selectScreen(RotationFragment.TAG, RotationFragment.newInstance())
@@ -69,6 +72,8 @@ class SecondPage : AppCompatActivity(R.layout.activity_second){
 
                 else -> false
             }
+
+
         }
     }
 
