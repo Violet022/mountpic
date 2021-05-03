@@ -2,34 +2,50 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Rotation"
-        android:id="@+id/actionRotation"/>
+        android:id="@+id/actionRotation"
+        android:icon="@drawable/ic_rotate"
+        android:title="@string/rotation"
+        />
 
     <item
-        android:title="Color Correction"
-        android:id="@+id/actionColorCorrection"/>
+        android:id="@+id/actionColorCorrection"
+        android:icon="@drawable/ic_color_correction"
+        android:title="@string/сolorCorrection"
+        />
 
     <item
-        android:title="Face Recognition"
-        android:id="@+id/actionFaceRecognition"/>
+        android:id="@+id/actionScaling"
+        android:icon="@drawable/ic_scaling"
+        android:title="@string/scaling"
+        />
 
     <item
-        android:title="Filtration"
-        android:id="@+id/actionFiltration"/>
+        android:id="@+id/actionFaceRecognition"
+        android:icon="@drawable/ic_face_recognition"
+        android:title="@string/faceRecognition"
+        />
 
     <item
-        android:title="Masking"
-        android:id="@+id/actionMasking"/>
+        android:id="@+id/actionSplines"
+        android:icon="@drawable/ic_spline"
+        android:title="@string/splines"
+        />
 
     <item
-        android:title="Retouch"
-        android:id="@+id/actionRetouch"/>
+        android:id="@+id/actionRetouch"
+        android:icon="@drawable/ic_retouch"
+        android:title="@string/retouch"
+        />
 
     <item
-        android:title="Scaling"
-        android:id="@+id/actionScaling"/>
+        android:id="@+id/actionMasking"
+        android:icon="@drawable/ic_masking"
+        android:title="@string/masking"
+        />
 
     <item
-        android:title="Splines"
-        android:id="@+id/actionSplines"/>
+        android:id="@+id/actionFiltration"
+        android:icon="@drawable/ic_filtration"
+        android:title="@string/filtration"
+        />
 </menu>

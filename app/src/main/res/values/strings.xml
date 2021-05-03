@@ -1,10 +1,20 @@
 <resources>
-    <string name="app_name">MainPage</string>
+    <string name="app_name">MOUNTPIC</string>
     <string name="Gallery">Галерея</string>
     <string name="Camera">Камера</string>
     <string name="cube">3D - кубик</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="messageForCamera">"Предоставьте MOUNTPIC доступ к камере на вашем устройстве для возможности создать изображение."</string>
+    <string name="messageForStorage">"Предоставьте MOUNTPIC доступ к файлам на вашем устройстве для возможности использования существующих изображений и сохранения отредактированных."</string>
+    <string name="tools">Инструменты</string>
+    <string name="rotation">Поворот</string>
+    <string name="сolorCorrection">Цветокоррекция и фильтры</string>
+    <string name="scaling">Масштабирование</string>
+    <string name="faceRecognition">Распознавание лиц</string>
+    <string name="splines">Рисование ломаных</string>
+    <string name="retouch">Ретуширование</string>
+    <string name="masking">Маскирование</string>
+    <string name="filtration">Фильтрация</string>
 </resources>

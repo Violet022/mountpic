@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SecondPage"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
     <include
         layout="@layout/content_second"/>
-
-
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
@@ -18,5 +19,20 @@
         app:menu="@menu/navigation_menu"
         android:layout_gravity="start"
         android:id="@+id/nav_menu"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="60dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="60dp"
+        android:paddingRight="20dp">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

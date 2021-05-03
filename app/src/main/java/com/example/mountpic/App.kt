@@ -1,4 +1,4 @@
-package com.example.mainpage
+package com.example.mountpic
 
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.example.mainpage
+package com.example.mountpic
 
 import androidx.fragment.app.Fragment
 
