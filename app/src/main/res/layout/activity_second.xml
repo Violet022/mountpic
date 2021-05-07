@@ -5,7 +5,9 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondPage">
+    tools:context=".SecondPage"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
     <include
         layout="@layout/content_second"/>
@@ -29,7 +31,7 @@
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

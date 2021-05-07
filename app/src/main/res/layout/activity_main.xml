@@ -5,56 +5,70 @@
     android:id="@+id/mainPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mountain_background"
+    android:background="@drawable/mount_background"
     tools:context=".MainActivity">
 
-
     <Button
-        android:id="@+id/gallery"
+        android:id="@+id/gallery_btn"
+        android:backgroundTint="@color/light_peach"
         android:layout_width="242dp"
         android:layout_height="50dp"
         android:layout_marginTop="198dp"
-        android:backgroundTint="#244A57"
         android:elevation="12dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/Gallery"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/dark_blue_1000"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
-        android:id="@+id/camera"
+        android:id="@+id/camera_btn"
         android:layout_width="242dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
-        android:backgroundTint="#244A57"
+        android:backgroundTint="@color/light_peach"
         android:elevation="12dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/Camera"
         android:textAlignment="center"
+        android:textColor="@color/dark_blue_1000"
         android:textSize="20sp"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gallery" />
+        app:layout_constraintTop_toBottomOf="@+id/gallery_btn" />
 
     <Button
         android:id="@+id/cube"
         android:layout_width="242dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
-        android:backgroundTint="#244A57"
+        android:backgroundTint="@color/light_peach"
         android:elevation="12dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/cube"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/dark_blue_1000"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_btn" />
+
+    <ImageView
+        android:id="@+id/huita"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
