@@ -42,7 +42,7 @@
         </activity>
 
         <activity
-            android:name=".SecondPage"
+            android:name=".SecondPageActivity"
             android:theme="@style/Theme.DrawerMenu.NoActionBar">
         </activity>
 

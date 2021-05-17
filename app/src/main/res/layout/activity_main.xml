@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/gallery_btn"
+        android:id="@+id/galleryBtn"
         android:backgroundTint="@color/light_peach"
         android:layout_width="242dp"
         android:layout_height="50dp"
@@ -27,7 +27,7 @@
 
 
     <Button
-        android:id="@+id/camera_btn"
+        android:id="@+id/cameraBtn"
         android:layout_width="242dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
@@ -41,10 +41,10 @@
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gallery_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/galleryBtn" />
 
     <Button
-        android:id="@+id/cube"
+        android:id="@+id/cubeBtn"
         android:layout_width="242dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
@@ -58,6 +58,7 @@
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/cameraBtn" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

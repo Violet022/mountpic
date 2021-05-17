@@ -17,4 +17,8 @@
     <string name="retouch">Ретуширование</string>
     <string name="masking">Маскирование</string>
     <string name="filtration">Фильтрация</string>
+    <string name="packageName">com.example.mountpic</string>
+    <string name="authorityName">com.example.mountpic.fileprovider</string>
+    <string name="extraForStorage">storageImage</string>
+    <string name="extraForCamera">cameraImage</string>
 </resources>
