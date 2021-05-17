@@ -38,8 +38,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".App" />
-
         <activity android:name=".MainActivity">
         </activity>
 

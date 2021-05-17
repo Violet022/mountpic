@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.system.Os.close
 import android.view.Gravity
 import android.widget.ImageView
@@ -18,6 +19,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mountpic.databinding.ActivitySecondBinding
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
+import java.io.IOException
+
+lateinit var picture: Uri
 
 class SecondPage : AppCompatActivity() {
 
@@ -29,15 +33,17 @@ class SecondPage : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         //получение изображения из галереи по Uri
-        val image: ImageView = findViewById(R.id.image_view)
-        if(intent?.extras?.get("UriImage") != null){
-            val picture = intent?.extras?.get("UriImage") as Uri
-            image.setImageURI(picture)
+        if (intent?.extras?.get(this@SecondPage.getString(R.string.extraForStorage)) != null) {
+            //val picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
+            picture = intent?.extras?.get(this@SecondPage.getString(R.string.extraForStorage)) as Uri
+            viewBinding.imageView.setImageURI(picture)
         }
 
-        if(intent?.extras?.get("ImageCamera") != null){
-            val picture = intent?.extras?.get("ImageCamera") as Uri
-            image.setImageURI(picture)
+        //получение изображения из камеры по Uri
+        if (intent?.extras?.get(this@SecondPage.getString(R.string.extraForCamera)) != null) {
+            //val picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
+            picture = intent?.extras?.get(this@SecondPage.getString(R.string.extraForCamera)) as Uri
+            viewBinding.imageView.setImageURI(picture)
         }
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
@@ -115,4 +121,14 @@ class SecondPage : AppCompatActivity() {
     }
 
     private fun findActiveFragment() = supportFragmentManager.fragments.find { it.isVisible }
+
+    fun fromUriToBitmap (): Bitmap {
+        lateinit var bitmapPicture: Bitmap
+        try {
+            bitmapPicture = MediaStore.Images.Media.getBitmap(this.contentResolver, picture)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return bitmapPicture
+    }
 }
