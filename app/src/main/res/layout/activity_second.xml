@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondPage"
+    tools:context=".SecondPageActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -23,8 +23,8 @@
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="111dp"
+            android:layout_height="97dp" />
 
     </LinearLayout>
 

@@ -1,16 +1,12 @@
 package com.example.mountpic
 
-import android.app.Activity
-import android.app.ProgressDialog.show
-import android.content.Intent
+import android.R.attr.bitmap
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.close
-import android.view.Gravity
-import android.widget.ImageView
+import android.provider.MediaStore
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -18,8 +14,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mountpic.databinding.ActivitySecondBinding
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
+import java.io.IOException
 
-class SecondPage : AppCompatActivity() {
+lateinit var picture: Uri
+
+class SecondPageActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivitySecondBinding::bind, R.id.drawerLayout)
 
@@ -29,15 +28,17 @@ class SecondPage : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         //получение изображения из галереи по Uri
-        val image: ImageView = findViewById(R.id.image_view)
-        if(intent?.extras?.get("UriImage") != null){
-            val picture = intent?.extras?.get("UriImage") as Uri
-            image.setImageURI(picture)
+        if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) != null) {
+            //val picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
+            picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
+            viewBinding.imageView.setImageURI(picture)
         }
 
-        if(intent?.extras?.get("ImageCamera") != null){
-            val picture = intent?.extras?.get("ImageCamera") as Uri
-            image.setImageURI(picture)
+        //получение изображения из камеры по Uri
+        if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) != null) {
+            //val picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
+            picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
+            viewBinding.imageView.setImageURI(picture)
         }
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
@@ -47,7 +48,7 @@ class SecondPage : AppCompatActivity() {
 
         viewBinding.navMenu.setNavigationItemSelectedListener { item ->
             viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
-            when(item.itemId){
+            when (item.itemId){
                 R.id.actionRotation -> {
                     selectScreen(RotationFragment.TAG, RotationFragment.newInstance())
                     true
@@ -98,21 +99,29 @@ class SecondPage : AppCompatActivity() {
             val active = findActiveFragment()
             val target = supportFragmentManager.findFragmentByTag(tag)
 
+            if (active != null && target != null && active == target) return@commit
 
-            if(active != null && target != null && active == target) return@commit
-
-            if(active != null){
+            if (active != null) {
                 hide(active)
             }
 
-            if(target == null){
+            if (target == null) {
                 add(R.id.fragmentContainer, fragment, tag)
-            }
-            else{
+            } else {
                 show(target)
             }
         }
     }
 
     private fun findActiveFragment() = supportFragmentManager.fragments.find { it.isVisible }
+
+    fun fromUriToBitmap (): Bitmap {
+        lateinit var bitmapPicture: Bitmap
+        try {
+            bitmapPicture = MediaStore.Images.Media.getBitmap(this.contentResolver, picture)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return bitmapPicture
+    }
 }
