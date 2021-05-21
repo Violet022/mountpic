@@ -34,7 +34,7 @@ class SecondPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
 
-        btnSave = findViewById(R.id.buttonSave)
+        btnSave = findViewById(R.id.save1)
 
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) != null) {
             gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
