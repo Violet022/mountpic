@@ -39,6 +39,7 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
             val kFactor: Double = (scalingFactor.text.toString()).toDouble()
             scalingImage = resizePixels(image, kFactor)
             image = scalingImage
+            //(context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(scalingImage)
             photoIm.setImageBitmap(scalingImage)
         }
 
