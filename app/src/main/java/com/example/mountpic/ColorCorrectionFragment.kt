@@ -46,26 +46,23 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
 
         btnNegative.setOnClickListener(){
             bitMap = (context as SecondPageActivity).setPicture
-
             newBitMap = setNegativeFilter(bitMap)
-
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
+            (context as SecondPageActivity).setPicture = newBitMap
         }
 
         btnGrey.setOnClickListener(){
             bitMap = (context as SecondPageActivity).setPicture
-
             newBitMap = setGreyFilter(bitMap)
-
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
+            (context as SecondPageActivity).setPicture = newBitMap
         }
 
         btnSketch.setOnClickListener(){
             bitMap = (context as SecondPageActivity).setPicture
-
             newBitMap = setSketchFilter(bitMap)
-
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
+            (context as SecondPageActivity).setPicture = newBitMap
 
         }
 

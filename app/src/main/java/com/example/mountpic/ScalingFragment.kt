@@ -40,8 +40,8 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
             scalingImage = resizePixels(image, kFactor)
             image = scalingImage
             //photoIm.setImageBitmap(scalingImage)
-
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(image)
+            (context as SecondPageActivity).setPicture = image
         }
 
         return rootView
