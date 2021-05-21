@@ -16,11 +16,13 @@ import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
 import java.io.IOException
 
-lateinit var picture: Uri
+//lateinit var picture: Uri
 
 class SecondPageActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivitySecondBinding::bind, R.id.drawerLayout)
+    lateinit var gotPicture: Uri
+    lateinit var setPicture: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +31,16 @@ class SecondPageActivity : AppCompatActivity() {
 
         //получение изображения из галереи по Uri
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) != null) {
-            //val picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
-            picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
-            viewBinding.imageView.setImageURI(picture)
+            gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
+            setPicture = fromUriToBitmap(gotPicture)
+            viewBinding.imageView.setImageBitmap(setPicture)
+            //viewBinding.imageView.setImageURI(picture)
         }
 
         //получение изображения из камеры по Uri
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) != null) {
-            //val picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
-            picture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
-            viewBinding.imageView.setImageURI(picture)
+            gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
+            //viewBinding.imageView.setImageURI(picture)
         }
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
@@ -94,6 +96,16 @@ class SecondPageActivity : AppCompatActivity() {
         }
     }
 
+    fun fromUriToBitmap (picture: Uri): Bitmap {
+        lateinit var bitmapPicture: Bitmap
+        try {
+            bitmapPicture = MediaStore.Images.Media.getBitmap(this.contentResolver, picture)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return bitmapPicture
+    }
+
     private fun selectScreen(tag: String, fragment: Fragment) {
         supportFragmentManager.commit {
             val active = findActiveFragment()
@@ -114,14 +126,4 @@ class SecondPageActivity : AppCompatActivity() {
     }
 
     private fun findActiveFragment() = supportFragmentManager.fragments.find { it.isVisible }
-
-    fun fromUriToBitmap (): Bitmap {
-        lateinit var bitmapPicture: Bitmap
-        try {
-            bitmapPicture = MediaStore.Images.Media.getBitmap(this.contentResolver, picture)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return bitmapPicture
-    }
 }

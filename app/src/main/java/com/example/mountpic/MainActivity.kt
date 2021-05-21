@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ private const val IMAGE_STORAGE_CODE = 4
 private const val FILE_NAME = "photo.jpg"
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var btnSettings: Button
     private lateinit var btnCamera: Button
     private lateinit var btnGallery: Button
     private lateinit var photoFile: File
@@ -36,8 +38,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        btnSettings = findViewById(R.id.settings)
         btnCamera = findViewById(R.id.cameraBtn)
         btnGallery = findViewById(R.id.galleryBtn)
+
+        btnSettings.setOnClickListener() {
+            val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS) //ACTION_APPLICATION_DETAILS_SETTINGS
+            startActivityForResult(intent, 100)
+        }
 
         btnGallery.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==

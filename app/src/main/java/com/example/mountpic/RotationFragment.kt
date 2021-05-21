@@ -1,21 +1,20 @@
 package com.example.mountpic
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_second.*
 import kotlin.math.cos
 import kotlin.math.sin
+
 
 class RotationFragment : Fragment(R.layout.fragment_rotation) {
     private lateinit var photoPlace: ImageView
@@ -30,22 +29,55 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_rotation, container, false)
 
-        photoPlace = rootView.findViewById(R.id.photoToRotate)
+        //photoPlace = rootView.findViewById(R.id.photoToRotate)
         makeRotation = rootView.findViewById(R.id.start)
         rotationDegree = rootView.findViewById(R.id.number)
 
-        var photo = (context as SecondPageActivity).fromUriToBitmap()
-        photoPlace.setImageBitmap(photo)
+        var photo = (context as SecondPageActivity).setPicture
+        //val width = 379
+        //photo = changeSize(photo, width)
+        //photoPlace.setImageBitmap(photo)
 
         makeRotation.setOnClickListener() {
             lateinit var rotatedPhoto: Bitmap
             var angle: String = rotationDegree.text.toString()
             var rotAngle: Double = toRadian(angle.toDouble())
             rotatedPhoto = rotate(photo, rotAngle)
-            photoPlace.setImageBitmap(rotatedPhoto)
+            (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(rotatedPhoto)
+            //photoPlace.setImageBitmap(rotatedPhoto)
         }
         return rootView
     }
+
+    /*fun dpToPx(dp: Int): Int {
+        val displayMetrics = requireContext().resources.displayMetrics
+        return ((dp * displayMetrics.density) + 0.5).toInt()
+    }*/
+
+    /*fun changeSize(picture : Bitmap, viewWidth : Int): Bitmap {
+        var picWidth :Int = picture.width
+        var picHeight: Int = picture.height
+        var options: BitmapFactory.Options = BitmapFactory.Options()
+        if (picHeight > picWidth) {
+            options.inJustDecodeBounds = true
+            options.inSampleSize = calculateInSampleSize(options, viewWidth, picWidth, picHeight)
+            options.inJustDecodeBounds = false
+        }
+        return BitmapFactory.decodeFile(picture.toString(), options)
+    }
+
+    fun calculateInSampleSize(options : BitmapFactory.Options, viewWidth : Int, width : Int, height : Int): Int {
+        var inSampleSize: Int = 1
+        if (height > viewWidth) {
+            var halfHeight: Int = height / 2
+            var halfWidth: Int = width / 2
+
+            while (halfHeight / inSampleSize > viewWidth) {
+                inSampleSize *= 2
+            }
+        }
+        return inSampleSize
+    }*/
 
     fun toRadian(x : Double): Double {
         return x * Math.PI/180.0

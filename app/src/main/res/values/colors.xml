@@ -13,4 +13,5 @@
     <color name="peach">#EE7967</color>
     <color name="light_peach">#E4AAA1</color>
     <color name="light_blue">#95B6D1</color>
+    <color name="no_color">#00FFFFFF</color>
 </resources>
