@@ -5,20 +5,14 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondPage"
+    tools:context=".SecondPageActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <include
         layout="@layout/content_second"/>
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/navigation_menu"
-        android:layout_gravity="start"
-        android:id="@+id/nav_menu"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,5 +28,15 @@
             android:layout_height="match_parent"/>
 
     </LinearLayout>
+
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu"
+        android:layout_gravity="start"
+        android:id="@+id/nav_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,14 +1,11 @@
 package com.example.mountpic
 
-import android.app.Activity
-import android.app.ProgressDialog.show
-import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.close
-import android.view.Gravity
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -19,14 +16,29 @@ import com.example.mountpic.databinding.ActivitySecondBinding
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
 
-class SecondPage : AppCompatActivity() {
+class SecondPageActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivitySecondBinding::bind, R.id.drawerLayout)
+
+
+
+    fun fromImageToBitmap(image: ImageView): Bitmap? {
+
+        val bitmapDrawable: BitmapDrawable = image.drawable as BitmapDrawable
+
+        return bitmapDrawable.bitmap
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
+
+
+
+
+
 
         //получение изображения из галереи по Uri
         val image: ImageView = findViewById(R.id.image_view)
