@@ -26,21 +26,22 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_scaling, container, false)
 
-        photoIm = rootView.findViewById(R.id.photoToScaling)
+        //photoIm = rootView.findViewById(R.id.photoToScaling)
         buttonScala = rootView.findViewById(R.id.buttonScaling)
         scalingFactor = rootView.findViewById(R.id.factor)
 
         //var image = (context as SecondPageActivity).fromUriToBitmap()
         var image = (context as SecondPageActivity).setPicture
-        photoIm.setImageBitmap(image)
+        //photoIm.setImageBitmap(image)
 
         buttonScala.setOnClickListener() {
             lateinit var scalingImage: Bitmap
             val kFactor: Double = (scalingFactor.text.toString()).toDouble()
             scalingImage = resizePixels(image, kFactor)
             image = scalingImage
-            //(context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(scalingImage)
-            photoIm.setImageBitmap(scalingImage)
+            //photoIm.setImageBitmap(scalingImage)
+
+            (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(image)
         }
 
         return rootView
@@ -74,5 +75,3 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
         return bitmapConvert
     }
 }
-
-//5.бонусный варик
