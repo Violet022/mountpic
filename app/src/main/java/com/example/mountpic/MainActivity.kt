@@ -210,6 +210,3 @@ class MainActivity : AppCompatActivity() {
         startActivity(setPictureIntent)
     }
 }
-
-
-
