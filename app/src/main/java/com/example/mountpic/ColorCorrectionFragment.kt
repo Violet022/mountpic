@@ -31,7 +31,6 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
         btnNegative = view.findViewById(R.id.buttonNegative)
         btnGrey = view.findViewById(R.id.buttonGrey)
         btnSketch = view.findViewById(R.id.buttonSketch)
-        btnSave = view.findViewById(R.id.buttonSave)
 
         lateinit var bitMap: Bitmap
         lateinit var newBitMap: Bitmap

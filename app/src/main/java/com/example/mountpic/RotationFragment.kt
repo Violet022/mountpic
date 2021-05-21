@@ -131,8 +131,9 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
 
                 val newX = round((i * cos(angle) - j * sin(angle) -dx).toFloat())
                 val newY = round((i * sin(angle) + j * cos(angle) -dy).toFloat())
-                if (!(newX < 0 || newX >= rotatedPicture.width || newY < 0 || newY >= rotatedPicture.height))
+                if (!(newX < 0 || newX >= rotatedPicture.width || newY < 0 || newY >= rotatedPicture.height)) {
                     rotatedPicture.setPixel(newX, newY, Color.argb(a, r, g, b))
+                }
             }
         }
         return rotatedPicture

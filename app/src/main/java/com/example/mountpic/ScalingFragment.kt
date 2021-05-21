@@ -56,8 +56,9 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
                 val r = Color.red(p)
                 val g = Color.green(p)
                 val b = Color.blue(p)
+                val a = Color.alpha(p)
 
-                bitmapConvert.setPixel(i, j, Color.argb(Color.alpha(p), r, g, b))
+                bitmapConvert.setPixel(i, j, Color.argb(a, r, g, b))
             }
         }
         return bitmapConvert

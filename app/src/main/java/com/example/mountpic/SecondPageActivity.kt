@@ -1,6 +1,8 @@
 package com.example.mountpic
 
+import android.R.attr.bitmap
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment

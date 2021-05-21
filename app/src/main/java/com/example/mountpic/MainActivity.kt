@@ -23,8 +23,8 @@ private const val CAMERA_REQUEST_CODE = 1
 private const val STORAGE_REQUEST_CODE = 2
 private const val IMAGE_CAMERA_CODE = 3
 private const val IMAGE_STORAGE_CODE = 4
+private const val SETTINGS_CODE = 5
 private const val FILE_NAME = "photo.jpg"
-private lateinit var photoFile: File
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnSettings: Button
@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         btnGallery = findViewById(R.id.galleryBtn)
 
         btnSettings.setOnClickListener() {
-            val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS) //ACTION_APPLICATION_DETAILS_SETTINGS
-            startActivityForResult(intent, 100)
+            val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
+            startActivityForResult(intent, SETTINGS_CODE)
         }
 
         btnGallery.setOnClickListener {
@@ -117,27 +117,27 @@ class MainActivity : AppCompatActivity() {
                 cameraPermissions[0] -> {
                     direction = "камере"
                     setMessage(context.getString(R.string.messageForCamera))
-                    setPositiveButton("ОК") {dialog, which ->
+                    setPositiveButton(context.getString(R.string.ok)) {dialog, which ->
                         ActivityCompat.requestPermissions(this@MainActivity, cameraPermissions, CAMERA_REQUEST_CODE)
                     }
                 }
                 cameraPermissions[1] -> {
                     direction = "хранилищу"
                     setMessage(context.getString(R.string.messageForStorage))
-                    setPositiveButton("ОК") {dialog, which ->
+                    setPositiveButton(context.getString(R.string.ok)) {dialog, which ->
                         ActivityCompat.requestPermissions(this@MainActivity, cameraPermissions, CAMERA_REQUEST_CODE)
                     }
                 }
                 storagePermission[0] -> {
                     direction = "галерее"
                     setMessage(context.getString(R.string.messageForStorage))
-                    setPositiveButton("ОК") {dialog, which ->
+                    setPositiveButton(context.getString(R.string.ok)) {dialog, which ->
                         ActivityCompat.requestPermissions(this@MainActivity, storagePermission, STORAGE_REQUEST_CODE)
                     }
                 }
             }
             setTitle("Нет доступа к $direction")
-            setNeutralButton("Отмена") {dialog, which ->
+            setNeutralButton(context.getString(R.string.cancel)) {dialog, which ->
                 dialog.cancel()
             }
             val dialog = builder.create()
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
                     val cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
                     val storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED
 
-                    if(cameraAccepted && storageAccepted){
+                    if (cameraAccepted && storageAccepted) {
                         makeAPhoto()
                     }
                 }
@@ -171,7 +171,6 @@ class MainActivity : AppCompatActivity() {
     private fun makeAPhoto() {
         photoFile = getPhotoFile(FILE_NAME)
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        //mImageUri = Uri.fromFile(photoFile)
         val fileProvider = FileProvider.getUriForFile(this, "com.example.mountpic.fileprovider", photoFile)
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
         if (takePictureIntent.resolveActivity(this.packageManager) != null) {
