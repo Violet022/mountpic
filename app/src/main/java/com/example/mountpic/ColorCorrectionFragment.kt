@@ -39,7 +39,6 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
         btnNegative = view.findViewById(R.id.buttonNegative)
         btnGrey = view.findViewById(R.id.buttonGrey)
         btnSketch = view.findViewById(R.id.buttonSketch)
-        btnSave = view.findViewById(R.id.buttonSave)
 
         lateinit var bitMap: Bitmap
         lateinit var newBitMap: Bitmap
@@ -67,14 +66,10 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
 
         ActivityCompat.requestPermissions(context as SecondPageActivity, storagePermission1, 1)
         ActivityCompat.requestPermissions(context as SecondPageActivity, storagePermission2, 1)
-
-        btnSave.setOnClickListener() {
-            saveToGallery(newBitMap)
-        }
         return view
     }
 
-    private fun saveToGallery(bitmap: Bitmap) {
+    /*private fun saveToGallery(bitmap: Bitmap) {
         var outputStream: FileOutputStream? = null
         val file: File = Environment.getExternalStorageDirectory()
         val dir = File(file.absolutePath + "/MyPics")
@@ -101,7 +96,7 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
     fun setGreyFilter(oldBitmap: Bitmap): Bitmap {
         var newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true)
