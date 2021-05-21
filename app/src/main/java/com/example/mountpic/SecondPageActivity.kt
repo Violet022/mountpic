@@ -27,8 +27,6 @@ class SecondPageActivity : AppCompatActivity() {
     lateinit var gotPicture: Uri
     lateinit var setPicture: Bitmap
 
-
-
     fun fromImageToBitmap(image: ImageView): Bitmap? {
 
         val bitmapDrawable: BitmapDrawable = image.drawable as BitmapDrawable
