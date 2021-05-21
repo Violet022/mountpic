@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,8 +24,10 @@ private const val STORAGE_REQUEST_CODE = 2
 private const val IMAGE_CAMERA_CODE = 3
 private const val IMAGE_STORAGE_CODE = 4
 private const val FILE_NAME = "photo.jpg"
+private lateinit var photoFile: File
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var btnSettings: Button
     private lateinit var btnCamera: Button
     private lateinit var btnGallery: Button
     private lateinit var photoFile: File
@@ -36,8 +39,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        btnSettings = findViewById(R.id.settings)
         btnCamera = findViewById(R.id.cameraBtn)
         btnGallery = findViewById(R.id.galleryBtn)
+
+        btnSettings.setOnClickListener() {
+            val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS) //ACTION_APPLICATION_DETAILS_SETTINGS
+            startActivityForResult(intent, 100)
+        }
 
         btnGallery.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
@@ -145,7 +154,9 @@ class MainActivity : AppCompatActivity() {
                     val cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
                     val storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED
 
-                    if (cameraAccepted && storageAccepted) makeAPhoto()
+                    if(cameraAccepted && storageAccepted){
+                        makeAPhoto()
+                    }
                 }
             }
             STORAGE_REQUEST_CODE -> {
@@ -160,7 +171,8 @@ class MainActivity : AppCompatActivity() {
     private fun makeAPhoto() {
         photoFile = getPhotoFile(FILE_NAME)
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val fileProvider = FileProvider.getUriForFile(this, this@MainActivity.getString(R.string.authorityName), photoFile)
+        //mImageUri = Uri.fromFile(photoFile)
+        val fileProvider = FileProvider.getUriForFile(this, "com.example.mountpic.fileprovider", photoFile)
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
         if (takePictureIntent.resolveActivity(this.packageManager) != null) {
             try {

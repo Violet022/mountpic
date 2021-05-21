@@ -30,7 +30,8 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
         buttonScala = rootView.findViewById(R.id.buttonScaling)
         scalingFactor = rootView.findViewById(R.id.factor)
 
-        var image = (context as SecondPageActivity).fromUriToBitmap()
+        //var image = (context as SecondPageActivity).fromUriToBitmap()
+        var image = (context as SecondPageActivity).setPicture
         photoIm.setImageBitmap(image)
 
         buttonScala.setOnClickListener() {

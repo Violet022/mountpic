@@ -5,38 +5,54 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondPageActivity"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:context=".SecondPageActivity">
+    <!--android:fitsSystemWindows="true"
+    tools:openDrawer="start">-->
 
     <include
         layout="@layout/content_second"/>
 
-<<<<<<< .merge_file_a20332
-=======
-
->>>>>>> .merge_file_a16488
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="60dp"
         android:paddingLeft="20dp"
-        android:paddingBottom="60dp"
-        android:paddingRight="20dp">
+        android:paddingTop="60dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="60dp">
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="111dp"
-            android:layout_height="97dp" />
+            android:layout_width="338dp"
+            android:layout_height="338dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.517" />
 
-    </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="8dp" />
 
-<<<<<<< .merge_file_a20332
-=======
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="8dp" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="508dp" />
 
->>>>>>> .merge_file_a16488
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
