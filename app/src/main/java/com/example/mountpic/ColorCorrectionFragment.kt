@@ -1,20 +1,14 @@
 package com.example.mountpic
 
-import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import java.io.File
-import java.io.FileOutputStream
-import java.lang.Exception
 
 class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
 
@@ -30,8 +24,6 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
 
     private var HIGHEST_COLOR_VALUE = 255
     private var LOWEST_COLOR_VALUE = 0
-    private val storagePermission1: Array<String> = kotlin.arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    private val storagePermission2: Array<String> = kotlin.arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_color_correction, container, false)
@@ -65,42 +57,7 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
             (context as SecondPageActivity).setPicture = newBitMap
         }
 
-        ActivityCompat.requestPermissions(context as SecondPageActivity, storagePermission1, 1)
-        ActivityCompat.requestPermissions(context as SecondPageActivity, storagePermission2, 1)
-
-        btnSave.setOnClickListener() {
-            saveToGallery(newBitMap)
-        }
         return view
-    }
-
-    private fun saveToGallery(bitmap: Bitmap) {
-        var outputStream: FileOutputStream? = null
-        val file: File = Environment.getExternalStorageDirectory()
-        val dir = File(file.absolutePath + "/MyPics")
-        dir.mkdirs()
-
-        val filename: String = String.format("%d.png", System.currentTimeMillis())
-        val outFile = File(dir, filename)
-
-        try {
-            outputStream = FileOutputStream(outFile)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-
-        try {
-            outputStream?.flush()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        try {
-            outputStream?.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     fun setGreyFilter(oldBitmap: Bitmap): Bitmap {
@@ -186,4 +143,3 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
         return newBitmap
     }
 }
-

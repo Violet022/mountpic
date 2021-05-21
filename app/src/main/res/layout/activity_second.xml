@@ -20,6 +20,7 @@
         android:paddingRight="20dp"
         android:paddingBottom="60dp">
 
+
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="wrap_content"
@@ -29,6 +30,13 @@
             app:layout_constraintStart_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.517" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Сохранить"
+            tools:ignore="MissingConstraints"
+            android:id="@+id/buttonSave"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -52,6 +60,7 @@
             app:layout_constraintGuide_begin="508dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"

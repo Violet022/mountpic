@@ -1,13 +1,11 @@
 package com.example.mountpic
 
-import android.R.attr.bitmap
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -17,6 +15,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mountpic.databinding.ActivitySecondBinding
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
+import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 
 
@@ -25,11 +25,14 @@ class SecondPageActivity : AppCompatActivity() {
     private val viewBinding by viewBinding(ActivitySecondBinding::bind, R.id.drawerLayout)
     lateinit var gotPicture: Uri
     lateinit var setPicture: Bitmap
+    lateinit var btnSave: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
+
+        btnSave = findViewById(R.id.buttonSave)
 
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) != null) {
             gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
@@ -93,6 +96,39 @@ class SecondPageActivity : AppCompatActivity() {
 
                 else -> false
             }
+        }
+
+        btnSave.setOnClickListener() {
+            saveToGallery()
+        }
+    }
+
+    private fun saveToGallery() {
+        var outputStream: FileOutputStream? = null
+        val file: File = Environment.getExternalStorageDirectory()
+        val dir = File(file.absolutePath + "/MyPics")
+        dir.mkdirs()
+
+        val filename: String = String.format("%d.png", System.currentTimeMillis())
+        val outFile = File(dir, filename)
+
+        try {
+            outputStream = FileOutputStream(outFile)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        setPicture.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+
+        try {
+            outputStream?.flush()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            outputStream?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
