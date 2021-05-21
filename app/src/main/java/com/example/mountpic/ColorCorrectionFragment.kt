@@ -30,9 +30,6 @@ public class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correcti
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
-
         lateinit var btnNegative: Button
         lateinit var btnGrey: Button
         lateinit var btnSketch: Button

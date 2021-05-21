@@ -22,13 +22,13 @@ class SecondPageActivity : AppCompatActivity() {
 
 
 
-    fun fromImageToBitmap(image: ImageView): Bitmap? {
-
-        val bitmapDrawable: BitmapDrawable = image.drawable as BitmapDrawable
-
-        return bitmapDrawable.bitmap
-
-    }
+//    fun fromImageToBitmap(image: ImageView): Bitmap? {
+//
+//        val bitmapDrawable: BitmapDrawable = image.drawable as BitmapDrawable
+//
+//        return bitmapDrawable.bitmap
+//
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
