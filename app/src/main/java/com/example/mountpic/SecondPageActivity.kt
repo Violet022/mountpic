@@ -1,6 +1,5 @@
 package com.example.mountpic
 
-import android.R.attr.bitmap
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -8,6 +7,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -28,13 +28,15 @@ class SecondPageActivity : AppCompatActivity() {
     lateinit var gotPicture: Uri
     lateinit var setPicture: Bitmap
     lateinit var btnSave: Button
+    lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
 
-        btnSave = findViewById(R.id.save1)
+        btnSave = findViewById(R.id.save)
+        imageView = findViewById(R.id.image_view)
 
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) != null) {
             gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
@@ -107,11 +109,13 @@ class SecondPageActivity : AppCompatActivity() {
 
     private fun saveToGallery() {
         var outputStream: FileOutputStream? = null
-        val file: File = Environment.getExternalStorageDirectory()
-        val dir = File(file.absolutePath + "/MyPics")
+        val bitmapDrawable = imageView.drawable as BitmapDrawable
+        val bitmap = bitmapDrawable.bitmap
+        val file: String? = Environment.getExternalStorageState()
+        val dir = File("$file/MyPics/")
         dir.mkdirs()
 
-        val filename: String = String.format("%d.png", System.currentTimeMillis())
+        val filename: String = String.format("%d.jpeg", System.currentTimeMillis())
         val outFile = File(dir, filename)
 
         try {
@@ -119,7 +123,7 @@ class SecondPageActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        setPicture.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
 
         try {
             outputStream?.flush()

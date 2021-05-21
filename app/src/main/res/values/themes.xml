@@ -45,5 +45,8 @@
         <item name="colorAccent">@color/peach</item>
     </style>
 
+    <style name="iconTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+    </style>
 
 </resources>

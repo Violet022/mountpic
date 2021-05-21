@@ -31,17 +31,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.517" />
 
-        <Button
-            android:id="@+id/save1"
-            android:layout_width="82dp"
-            android:layout_height="71dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/ic_save"
-            android:backgroundTint="@color/black"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="299dp" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRight"
             android:layout_width="wrap_content"
