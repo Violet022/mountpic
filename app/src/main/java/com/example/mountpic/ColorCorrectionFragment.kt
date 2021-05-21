@@ -5,7 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
@@ -14,7 +16,12 @@ import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
 
-public class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
+class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
+
+    lateinit var btnNegative: Button
+    lateinit var btnGrey: Button
+    lateinit var btnSketch: Button
+    lateinit var btnSave: Button
 
     companion object{
         val TAG = ColorCorrectionFragment::class.java.simpleName
@@ -26,67 +33,53 @@ public class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correcti
     private val storagePermission1: Array<String> = kotlin.arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private val storagePermission2: Array<String> = kotlin.arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-
-
-        lateinit var btnNegative: Button
-        lateinit var btnGrey: Button
-        lateinit var btnSketch: Button
-        lateinit var btnSave: Button
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_color_correction, container, false)
 
         btnNegative = view.findViewById(R.id.buttonNegative)
         btnGrey = view.findViewById(R.id.buttonGrey)
         btnSketch = view.findViewById(R.id.buttonSketch)
         btnSave = view.findViewById(R.id.buttonSave)
 
-        lateinit var image: ImageView
         lateinit var bitMap: Bitmap
         lateinit var newBitMap: Bitmap
 
-        btnNegative.setOnClickListener{
-
-            image = view.findViewById(R.id.image_view)
-
-            bitMap = (context as SecondPageActivity).fromImageToBitmap(image)!!
+        btnNegative.setOnClickListener(){
+            bitMap = (context as SecondPageActivity).setPicture
 
             newBitMap = setNegativeFilter(bitMap)
+
+            (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
         }
 
-        btnGrey.setOnClickListener{
-
-            image = view.findViewById(R.id.image_view)
-
-            bitMap = (context as SecondPageActivity).fromImageToBitmap(image)!!
+        btnGrey.setOnClickListener(){
+            bitMap = (context as SecondPageActivity).setPicture
 
             newBitMap = setGreyFilter(bitMap)
+
+            (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
         }
 
-        btnSketch.setOnClickListener{
-
-            image = view.findViewById(R.id.image_view)
-
-            bitMap = (context as SecondPageActivity).fromImageToBitmap(image)!!
+        btnSketch.setOnClickListener(){
+            bitMap = (context as SecondPageActivity).setPicture
 
             newBitMap = setSketchFilter(bitMap)
 
+            (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
+
         }
 
- // ???????????????????????????????????????????????????????????????????????????????????????????????????????
+        // ???????????????????????????????????????????????????????????????????????????????????????????????????????
         ActivityCompat.requestPermissions(context as SecondPageActivity, storagePermission1, 1)
         ActivityCompat.requestPermissions(context as SecondPageActivity, storagePermission2, 1)
 
 
-        btnSave.setOnClickListener {
+        btnSave.setOnClickListener() {
             saveToGallery(newBitMap)
-
         }
 
-}
+        return view
+    }
 
     private fun saveToGallery(bitmap: Bitmap){
         var outputStream: FileOutputStream? = null
@@ -122,15 +115,15 @@ public class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correcti
         }
     }
 
-    public fun setGreyFilter(oldBitmap: Bitmap): Bitmap {
+    fun setGreyFilter(oldBitmap: Bitmap): Bitmap {
         var newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true)
 
         var imageHeight = newBitmap.height
         var imageWidth = newBitmap.width
 
-        for(i in 0..imageWidth){
+        for(i in 0 until imageWidth){
 
-            for(j in 0..imageHeight){
+            for(j in 0 until imageHeight){
 
                 var oldPixel = oldBitmap.getPixel(i, j)
 
@@ -157,16 +150,16 @@ public class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correcti
     }
 
 
-    public fun setNegativeFilter(oldBitmap: Bitmap): Bitmap {
+    fun setNegativeFilter(oldBitmap: Bitmap): Bitmap {
 
         var newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true)
 
         var imageHeight = newBitmap.height
         var imageWidth = newBitmap.width
 
-        for(i in 0..imageWidth){
+        for(i in 0 until imageWidth){
 
-            for(j in 0..imageHeight){
+            for(j in 0 until imageHeight){
 
                 var oldPixel = oldBitmap.getPixel(i, j)
 
@@ -189,16 +182,16 @@ public class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correcti
     }
 
 
-    public fun setSketchFilter(oldBitmap: Bitmap): Bitmap {
+    fun setSketchFilter(oldBitmap: Bitmap): Bitmap {
 
         var newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true)
 
         var imageHeight = newBitmap.height
         var imageWidth = newBitmap.width
 
-        for(i in 0..imageWidth){
+        for(i in 0 until imageWidth){
 
-            for(j in 0..imageHeight){
+            for(j in 0 until imageHeight){
 
                 var oldPixel = oldBitmap.getPixel(i, j)
 
