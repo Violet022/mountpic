@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_second.*
 import kotlinx.android.synthetic.main.content_second.*
 import java.io.IOException
 
-//lateinit var picture: Uri
 
 class SecondPageActivity : AppCompatActivity() {
 
@@ -27,31 +26,21 @@ class SecondPageActivity : AppCompatActivity() {
     lateinit var gotPicture: Uri
     lateinit var setPicture: Bitmap
 
-    fun fromImageToBitmap(image: ImageView): Bitmap? {
-
-        val bitmapDrawable: BitmapDrawable = image.drawable as BitmapDrawable
-
-        return bitmapDrawable.bitmap
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         setSupportActionBar(toolbar)
 
-        //получение изображения из галереи по Uri
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) != null) {
             gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForStorage)) as Uri
             setPicture = fromUriToBitmap(gotPicture)
             viewBinding.imageView.setImageBitmap(setPicture)
-            //viewBinding.imageView.setImageURI(picture)
         }
 
-        //получение изображения из камеры по Uri
         if (intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) != null) {
             gotPicture = intent?.extras?.get(this@SecondPageActivity.getString(R.string.extraForCamera)) as Uri
-            //viewBinding.imageView.setImageURI(picture)
+            setPicture = fromUriToBitmap(gotPicture)
+            viewBinding.imageView.setImageBitmap(setPicture)
         }
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
@@ -61,7 +50,7 @@ class SecondPageActivity : AppCompatActivity() {
 
         viewBinding.navMenu.setNavigationItemSelectedListener { item ->
             viewBinding.drawerLayout.closeDrawer(GravityCompat.START)
-            when (item.itemId){
+            when (item.itemId) {
                 R.id.actionRotation -> {
                     selectScreen(RotationFragment.TAG, RotationFragment.newInstance())
                     true

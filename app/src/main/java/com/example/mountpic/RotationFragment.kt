@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_second.view.*
 import kotlin.math.cos
 import kotlin.math.sin
-
 
 class RotationFragment : Fragment(R.layout.fragment_rotation) {
     private lateinit var makeRotation: Button
@@ -39,16 +38,17 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
             var rotAngle: Double = toRadian(angle.toDouble())
             rotatedPhoto = rotate(photo, rotAngle)
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(rotatedPhoto)
+            (context as SecondPageActivity).setPicture = rotatedPhoto
         }
         return rootView
     }
 
     class Pixel(
-            var x : Double,
-            var y : Double
+            var x: Double,
+            var y: Double
     )
 
-    fun toRadian(x : Double): Double {
+    fun toRadian(x: Double): Double {
         return x * Math.PI/180.0
     }
 
@@ -71,13 +71,13 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
         return newPixel
     }
 
-    fun max(a : Double, b : Double, c : Double, d : Double): Double {
+    fun max(a: Double, b: Double, c: Double, d: Double): Double {
         if(a >= b && a >= c && a >= d) return a
         if(b >= a && b >= c && b >= d) return b
         if(c >= a && c >= b && c >= d) return c
         return d
     }
-    fun min(a : Double, b : Double, c : Double, d : Double): Double {
+    fun min(a: Double, b: Double, c: Double, d: Double): Double {
         if(a <= b && a <= c && a <= d) return a
         if(b <= a && b <= c && b <= d) return b
         if(c <= a && c <= b && c <= d) return c
@@ -95,14 +95,14 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
         return maxY - minY
     }
 
-    fun round(x : Float) : Int {
-        if(x - x.toInt() < 0.5)
+    fun round(x: Float): Int {
+        if (x - x.toInt() < 0.5)
             return x.toInt()
         else
             return x.toInt() + 1
     }
 
-    fun rotate(pic : Bitmap, angle : Double): Bitmap {
+    fun rotate(pic: Bitmap, angle: Double): Bitmap {
         val rotationMatrix = makeAMatrix(angle)
         val pointOO = findNewCoordinates(Pixel(0.0, 0.0), rotationMatrix)
         val pointOY = findNewCoordinates(Pixel(0.0, pic.height.toDouble()), rotationMatrix)
@@ -116,21 +116,23 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
         val dx = min(pointOO.x, pointOY.x, pointXO.x, pointXY.x)
         val dy = min(pointOO.y, pointOY.y, pointXO.y, pointXY.y)
 
-        for(i in 0 until rotatedPicture.width){
-            for(j in 0 until rotatedPicture.height){
+        for (i in 0 until rotatedPicture.width) {
+            for (j in 0 until rotatedPicture.height) {
                 rotatedPicture.setPixel(i, j, Color.argb(Color.alpha(0), 0,0,0))
             }
         }
-        for(i in 0 until pic.width){
-            for(j in 0 until pic.height){
+
+        for (i in 0 until pic.width) {
+            for (j in 0 until pic.height) {
                 val pixel = pic.getPixel(i, j)
                 var r = Color.red(pixel)
                 var g = Color.green(pixel)
                 var b = Color.blue(pixel)
                 var a = Color.alpha(pixel)
+
                 val newX = round((i * cos(angle) - j * sin(angle) -dx).toFloat())
                 val newY = round((i * sin(angle) + j * cos(angle) -dy).toFloat())
-                if(!(newX < 0 || newX >= rotatedPicture.width || newY < 0 || newY >= rotatedPicture.height))
+                if (!(newX < 0 || newX >= rotatedPicture.width || newY < 0 || newY >= rotatedPicture.height))
                     rotatedPicture.setPixel(newX, newY, Color.argb(a, r, g, b))
             }
         }
@@ -140,204 +142,3 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-
-    fun max(a : Double, b : Double, c : Double, d : Double): Double {
-        if(a >= b && a >= c && a >= d) return a
-        if(b >= a && b >= c && b >= d) return b
-        if(c >= a && c >= b && c >= d) return c
-        return d
-    }
-    fun min(a : Double, b : Double, c : Double, d : Double): Double {
-        if(a <= b && a <= c && a <= d) return a
-        if(b <= a && b <= c && b <= d) return b
-        if(c <= a && c <= b && c <= d) return c
-        return d
-    }
-
-    fun round(x : Float) : Int {
-        if(x - x.toInt() < 0.5)
-            return x.toInt()
-        else
-            return x.toInt() + 1
-    }
-
-    fun rotate(data : Bitmap, angle : Double): Bitmap {
-        val cornerOO = Point(0.0, 0.0)
-        val cornerOY = Point(-data.height * sin(angle), data.height * cos(angle))
-        val cornerXO = Point(data.width * cos(angle), data.width * sin(angle))
-        val cornerXY = Point(data.width * cos(angle) - data.height * sin(angle), data.width * sin(angle) + data.height * cos(angle))
-
-        val sizeOfNewX = max(cornerOO.x, cornerOY.x, cornerXO.x, cornerXY.x)
-        val sizeOfNewY = max(cornerOO.y, cornerOY.y, cornerXO.y, cornerXY.y)
-        var bitmapConvert = Bitmap.createBitmap(sizeOfNewX.toInt(), sizeOfNewY.toInt(), data.config)
-        val dx = min(cornerOO.x, cornerOY.x, cornerXO.x, cornerXY.x)
-        val dy = min(cornerOO.y, cornerOY.y, cornerXO.y, cornerXY.y)
-
-        for(i in 0 until bitmapConvert.width){
-            for(j in 0 until bitmapConvert.height){
-                bitmapConvert.setPixel(i, j, Color.argb(Color.alpha(0), 0,0,0))
-            }
-        }
-        for(i in 0 until data.width){
-            for(j in 0 until data.height){
-                val p = data.getPixel(i, j)
-                var r = Color.red(p)
-                var g = Color.green(p)
-                var b = Color.blue(p)
-                var alpha = Color.alpha(p)
-                val newX = round((i * cos(angle) - j * sin(angle) -dx).toFloat())
-                val newY = round((i * sin(angle) + j * cos(angle) -dy).toFloat())
-                if(!(newX < 0 || newX >= bitmapConvert.width || newY < 0 || newX >= bitmapConvert.height))
-                    bitmapConvert.setPixel(newX, newY, Color.argb(Color.alpha(p), r, g, b))
-            }
-        }
-
-        return bitmapConvert
-    }
-
-}*/
