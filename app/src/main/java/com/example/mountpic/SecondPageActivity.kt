@@ -2,9 +2,12 @@ package com.example.mountpic
 
 import android.R.attr.bitmap
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -23,6 +26,16 @@ class SecondPageActivity : AppCompatActivity() {
     private val viewBinding by viewBinding(ActivitySecondBinding::bind, R.id.drawerLayout)
     lateinit var gotPicture: Uri
     lateinit var setPicture: Bitmap
+
+
+
+    fun fromImageToBitmap(image: ImageView): Bitmap? {
+
+        val bitmapDrawable: BitmapDrawable = image.drawable as BitmapDrawable
+
+        return bitmapDrawable.bitmap
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
