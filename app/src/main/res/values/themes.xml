@@ -37,13 +37,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <!--<style name="ThemeOverlay.MyApp.Button" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/dark_blue_900</item>
-    </style>-->
-
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/peach</item>
     </style>
 
+    <style name="iconTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+    </style>
 
 </resources>

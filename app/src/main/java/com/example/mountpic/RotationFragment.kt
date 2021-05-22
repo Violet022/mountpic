@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_second.view.*
 import kotlin.math.cos
+import kotlin.math.roundToInt
 import kotlin.math.sin
 
 class RotationFragment : Fragment(R.layout.fragment_rotation) {
@@ -95,13 +96,6 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
         return maxY - minY
     }
 
-    fun round(x: Float): Int {
-        if (x - x.toInt() < 0.5)
-            return x.toInt()
-        else
-            return x.toInt() + 1
-    }
-
     fun rotate(pic: Bitmap, angle: Double): Bitmap {
         val rotationMatrix = makeAMatrix(angle)
         val pointOO = findNewCoordinates(Pixel(0.0, 0.0), rotationMatrix)
@@ -116,24 +110,18 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
         val dx = min(pointOO.x, pointOY.x, pointXO.x, pointXY.x)
         val dy = min(pointOO.y, pointOY.y, pointXO.y, pointXY.y)
 
-        for (i in 0 until rotatedPicture.width) {
-            for (j in 0 until rotatedPicture.height) {
-                rotatedPicture.setPixel(i, j, Color.argb(Color.alpha(0), 0,0,0))
-            }
-        }
-
         for (i in 0 until pic.width) {
             for (j in 0 until pic.height) {
                 val pixel = pic.getPixel(i, j)
-                var r = Color.red(pixel)
-                var g = Color.green(pixel)
-                var b = Color.blue(pixel)
-                var a = Color.alpha(pixel)
+                val r = Color.red(pixel)
+                val g = Color.green(pixel)
+                val b = Color.blue(pixel)
+                val a = Color.alpha(pixel)
 
-                val newX = round((i * cos(angle) - j * sin(angle) -dx).toFloat())
-                val newY = round((i * sin(angle) + j * cos(angle) -dy).toFloat())
-                if (!(newX < 0 || newX >= rotatedPicture.width || newY < 0 || newY >= rotatedPicture.height)) {
-                    rotatedPicture.setPixel(newX, newY, Color.argb(a, r, g, b))
+                val newPixelX = (i * cos(angle) - j * sin(angle) - dx).roundToInt()
+                val newPixelY = (i * sin(angle) + j * cos(angle) - dy).roundToInt()
+                if (!(newPixelX < 0 || newPixelX >= rotatedPicture.width || newPixelY < 0 || newPixelY >= rotatedPicture.height)) {
+                    rotatedPicture.setPixel(newPixelX, newPixelY, Color.argb(a, r, g, b))
                 }
             }
         }
