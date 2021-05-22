@@ -179,8 +179,6 @@ class MainActivity : AppCompatActivity() {
             } catch (e: ActivityNotFoundException) {
                 e.printStackTrace()
             }
-        } else {
-            Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show()
         }
     }
 
