@@ -31,18 +31,15 @@ public class SplinesFragment : Fragment(R.layout.fragment_splines) {
         fun newInstance() = SplinesFragment()
     }
 
-    private val storagePermission1: Array<String> = kotlin.arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    private val storagePermission2: Array<String> = kotlin.arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView: View = inflater.inflate(R.layout.fragment_splines, container, false)
         lateinit var btnSet: Button
-        btnSet = view?.findViewById(R.id.buttonSpline)!!
+        btnSet = rootView.findViewById(R.id.buttonSpline)
 
         btnSet.setOnClickListener {
             fromPolylineToSpline(coordinates)
         }
 
-        val rootView: View = inflater.inflate(R.layout.fragment_splines, container, false)
         val relativeLayout = rootView.findViewById<View>(canvasZone) as RelativeLayout
         relativeLayout.addView(DrawingView(activity))
         return rootView
