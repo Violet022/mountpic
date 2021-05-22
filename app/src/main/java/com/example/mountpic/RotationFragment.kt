@@ -31,12 +31,11 @@ class RotationFragment : Fragment(R.layout.fragment_rotation) {
         makeRotation = rootView.findViewById(R.id.start)
         rotationDegree = rootView.findViewById(R.id.number)
 
-        var photo = (context as SecondPageActivity).setPicture
-
         makeRotation.setOnClickListener() {
             lateinit var rotatedPhoto: Bitmap
             var angle: String = rotationDegree.text.toString()
             var rotAngle: Double = toRadian(angle.toDouble())
+            var photo = (context as SecondPageActivity).setPicture
             rotatedPhoto = rotate(photo, rotAngle)
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(rotatedPhoto)
             (context as SecondPageActivity).setPicture = rotatedPhoto

@@ -27,13 +27,10 @@ class ScalingFragment : Fragment(R.layout.fragment_scaling) {
         buttonScala = rootView.findViewById(R.id.buttonScaling)
         scalingFactor = rootView.findViewById(R.id.factor)
 
-        var image = (context as SecondPageActivity).setPicture
-
         buttonScala.setOnClickListener() {
-            lateinit var scalingImage: Bitmap
             val kFactor: Double = (scalingFactor.text.toString()).toDouble()
-            scalingImage = resizePixels(image, kFactor)
-            image = scalingImage
+            var image = (context as SecondPageActivity).setPicture
+            image = resizePixels(image, kFactor)
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(image)
             (context as SecondPageActivity).setPicture = image
         }
