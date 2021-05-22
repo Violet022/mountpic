@@ -91,7 +91,6 @@ public class SplinesFragment : Fragment(R.layout.fragment_splines) {
             j += 4
             matrix[alreadyInMatrix + i][j] = -2F
         }
-
         alreadyInMatrix += numberOfVertexes - 2
 
         //условие 3 - вторые производные в крайних точках равны нулю
@@ -100,7 +99,7 @@ public class SplinesFragment : Fragment(R.layout.fragment_splines) {
         matrix[alreadyInMatrix + 1][lastIndex - 1] = coordinates[numberOfVertexes - 1].x - coordinates[numberOfVertexes - 2].x
         //конец инициализации матрицы
         //решение системы линейных уравнений с помощью метода Гаусса
-        //Прямой ход, приведение к верхнетреугольному виду
+        //Приведение к треугольному виду
         val numberOfUnknowns = 4 * numberOfVertexes - 3
         val numberOfEquations = 4 * numberOfVertexes - 4
 
@@ -108,31 +107,33 @@ public class SplinesFragment : Fragment(R.layout.fragment_splines) {
         var answer = Array(numberOfUnknowns, {0F})
         var k: Int
 
+        //делаем так, чтобы гланый элемент строки был равен 1 (делим все элементы строки на глвыный элемент)
         for (i in 0 until numberOfEquations) {
             j = numberOfEquations
             tmp = matrix[i][i];
-            while (j >= i) {
+            while( j >= i) {
                 matrix[i][j] /= tmp
                 j--
             }
 
+            //вычитаем из строк ниже iую строку. Как итог, во всех строках ниже iой элементы в столбце под гланым элементом итой строки будут равны 0
             for (l in (i+1) until numberOfEquations) {
-                tmp = matrix[l][i]
+                tmp = matrix[l][i];
                 k = numberOfEquations
                 while (k >= i) {
-                    matrix[j][k] -= tmp * matrix[i][k]
+                    matrix[l][k] -= tmp * matrix[i][k]
                     k--
                 }
             }
         }
-        //обратный ход
+        //Обратный ход
         answer[numberOfEquations - 1] = matrix[numberOfEquations - 1][numberOfEquations]
         j = numberOfEquations - 2
+
         while (j >= 0) {
             answer[j] = matrix[j][numberOfEquations]
-            for (i in (j+1) until numberOfEquations) {
+            for (i in (j+1) until numberOfEquations)
                 answer[j] -= matrix[j][i] * answer[i]
-            }
             j--
         }
         return answer

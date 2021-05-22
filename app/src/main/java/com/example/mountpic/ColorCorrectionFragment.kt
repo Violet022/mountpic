@@ -1,21 +1,26 @@
 package com.example.mountpic
 
+import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
 
 class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
 
     lateinit var btnNegative: Button
     lateinit var btnGrey: Button
     lateinit var btnSketch: Button
-    lateinit var btnSave: Button
 
     companion object {
         val TAG = ColorCorrectionFragment::class.java.simpleName
@@ -55,7 +60,6 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
             (context as SecondPageActivity).findViewById<ImageView>(R.id.image_view).setImageBitmap(newBitMap)
             (context as SecondPageActivity).setPicture = newBitMap
         }
-
         return view
     }
 
@@ -142,3 +146,4 @@ class ColorCorrectionFragment : Fragment(R.layout.fragment_color_correction){
         return newBitmap
     }
 }
+
